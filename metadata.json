@@ -1,0 +1,6 @@
+{
+  "name": "SAY Autos Bogotá",
+  "description": "Showroom de vehículos seleccionados en Bogotá con peritaje certificado, garantía de procedencia, financiación y atención directa por WhatsApp e Instagram.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

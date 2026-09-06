@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 180" width="100%" height="100%">
+  <defs>
+    <!-- Rich Rose Gold / Warm Copper Gradients -->
+    <linearGradient id="sayRoseGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#f5ddca" />
+      <stop offset="25%" stopColor="#e5be9e" />
+      <stop offset="50%" stopColor="#dfb692" />
+      <stop offset="75%" stopColor="#c5926b" />
+      <stop offset="100%" stopColor="#a46f48" />
+    </linearGradient>
+
+    <linearGradient id="sayMetallicHoriz" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stopColor="#b37c54" />
+      <stop offset="20%" stopColor="#dfb692" />
+      <stop offset="40%" stopColor="#f7e4d3" />
+      <stop offset="60%" stopColor="#dfb692" />
+      <stop offset="85%" stopColor="#c5926b" />
+      <stop offset="100%" stopColor="#96613d" />
+    </linearGradient>
+
+    <!-- Subtle Metallic Emboss / Shadow Filter -->
+    <filter id="sayEmbossShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#000000" floodOpacity="0.5" />
+    </filter>
+  </defs>
+
+  <g filter="url(#sayEmbossShadow)">
+    <!-- Top Geometric Art Deco Frame Accent Lines (From Official Visual Identity) -->
+    <path 
+      d="M 20 18 L 90 18 L 115 5 L 285 5 L 310 18 L 380 18" 
+      fill="none" 
+      stroke="url(#sayMetallicHoriz)" 
+      stroke-width="1.6" 
+      opacity="0.85" 
+    />
+    <path 
+      d="M 35 24 L 95 24 L 118 12 L 282 12 L 305 24 L 365 24" 
+      fill="none" 
+      stroke="url(#sayMetallicHoriz)" 
+      stroke-width="1" 
+      opacity="0.5" 
+    />
+
+    <!-- ==================== THE CAR SILHOUETTE ==================== -->
+    <!-- 1. Main Upper Body Silhouette (Roof, Hood, Rear Deck, Spoiler, Haunches) -->
+    <path
+      d="
+        M 38 88
+        C 30 86 24 80 22 74
+        C 20 68 25 65 32 63
+        C 42 61 54 60 70 59
+        C 86 58 102 56 116 52
+        C 126 48 140 38 160 32
+        C 178 27 202 26 226 30
+        C 246 34 266 43 282 52
+        C 292 57 302 60 314 58
+        C 318 57 319 60 316 63
+        C 310 69 300 70 292 70
+        C 298 74 304 80 306 87
+        C 308 92 304 93 296 93
+        C 288 93 282 92 278 88
+        C 272 80 262 74 250 74
+        C 238 74 228 80 222 88
+        C 220 91 216 93 208 93
+        L 132 93
+        C 126 93 122 91 120 87
+        C 114 78 104 72 92 72
+        C 80 72 70 78 64 87
+        C 62 91 56 93 48 93
+        C 42 93 39 90 38 88 Z
+      "
+      fill="url(#sayRoseGoldGrad)"
+    />
+
+    <!-- 2. Front Headlight / Nose Air Intake Slit Cutout -->
+    <path
+      d="M 28 67 C 34 65 42 65 48 67 C 40 71 33 72 26 71 Z"
+      fill="#071220"
+    />
+
+    <!-- 3. Front Fender Sculpted Flare Accent (Eyebrow Curve) -->
+    <path
+      d="
+        M 38 78
+        C 44 70 56 64 72 63
+        C 88 62 102 68 110 75
+        C 106 73 94 67 76 67
+        C 58 67 46 72 38 78 Z
+      "
+      fill="#071220"
+    />
+
+    <!-- 4. Front Side Window (Windshield & Driver Window) -->
+    <path
+      d="
+        M 126 52
+        C 134 46 146 39 164 35
+        C 180 32 196 32 208 34
+        L 204 53
+        C 180 54 150 54 126 52 Z
+      "
+      fill="#071220"
+    />
+
+    <!-- 5. B-Pillar Slanted Rib (Separates Front and Rear Glass) -->
+    <path
+      d="M 207 34 L 213 35 L 209 53 L 203 53 Z"
+      fill="url(#sayRoseGoldGrad)"
+    />
+
+    <!-- 6. Rear Quarter Window (Fastback Triangular Wedge) -->
+    <path
+      d="
+        M 215 35
+        C 228 37 244 43 258 50
+        C 246 52 232 53 211 53
+        L 215 35 Z
+      "
+      fill="#071220"
+    />
+
+    <!-- 7. Aerodynamic Side Mirror -->
+    <path
+      d="
+        M 140 48
+        C 142 46 150 46 154 48
+        C 156 50 152 53 144 53
+        C 138 53 138 50 140 48 Z
+      "
+      fill="url(#sayRoseGoldGrad)"
+    />
+    <rect x="144" y="52" width="2" height="3" fill="url(#sayRoseGoldGrad)" />
+
+    <!-- 8. Sculpted Waistline & Dynamic Rear Haunch Crescent Scoop -->
+    <path
+      d="
+        M 132 60
+        C 156 60 184 61 210 61
+        C 236 61 262 57 282 55
+        C 292 54 300 56 306 58
+        C 300 59 288 60 278 61
+        C 256 64 232 66 210 65
+        C 182 65 154 64 132 60 Z
+      "
+      fill="#071220"
+    />
+
+    <!-- Rear Flank Scoop Negative Space -->
+    <path
+      d="
+        M 235 66
+        C 255 65 275 66 292 70
+        C 285 76 270 78 252 77
+        C 242 76 236 72 235 66 Z
+      "
+      fill="#071220"
+    />
+
+    <!-- 9. Lower Rocker Panel Dynamic Wedge / Intake Blade -->
+    <path
+      d="
+        M 136 84
+        L 172 84
+        C 160 88 144 89 136 89
+        Z
+      "
+      fill="#071220"
+    />
+
+    <!-- 10. Front Wheel Center Axle / Hub Ring -->
+    <circle cx="92" cy="87" r="5" fill="url(#sayRoseGoldGrad)" />
+    <circle cx="92" cy="87" r="2.3" fill="#071220" />
+
+    <!-- 11. Rear Wheel Center Axle / Hub Ring -->
+    <circle cx="250" cy="87" r="5" fill="url(#sayRoseGoldGrad)" />
+    <circle cx="250" cy="87" r="2.3" fill="#071220" />
+
+    <!-- ==================== OFFICIAL BRAND TYPOGRAPHY ==================== -->
+    <!-- Line 1: SAY_AUTOSBOGOTA -->
+    <text
+      x="200"
+      y="126"
+      text-anchor="middle"
+      fill="url(#sayMetallicHoriz)"
+      font-family="'Playfair Display', 'Cinzel', 'Plus Jakarta Sans', serif"
+      font-size="16.5"
+      font-weight="600"
+      letter-spacing="4.2"
+    >
+      SAY_AUTOSBOGOTA
+    </text>
+
+    <!-- Line 2: BOGOTA - COLOMBIA -->
+    <text
+      x="200"
+      y="148"
+      text-anchor="middle"
+      fill="url(#sayRoseGoldGrad)"
+      opacity="0.88"
+      font-family="'Plus Jakarta Sans', sans-serif"
+      font-size="9.5"
+      font-weight="400"
+      letter-spacing="5.5"
+    >
+      BOGOTA - COLOMBIA
+    </text>
+  </g>
+</svg>
