@@ -14,6 +14,7 @@ import { FinanceCalculator } from './components/FinanceCalculator';
 import { SellCarSection } from './components/SellCarSection';
 import { LocationAndContact } from './components/LocationAndContact';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { WhatsAppConfigModal } from './components/WhatsAppConfigModal';
 import { Footer } from './components/Footer';
 import { generateWhatsAppLink, formatCOP } from './utils/formatters';
@@ -414,6 +415,14 @@ export default function App() {
         config={config}
         onOpenConfig={() => setIsConfigModalOpen(true)}
         onOpenCard={() => scrollToSection('tarjeta')}
+      />
+
+      {/* Mobile Bottom Navigation Bar (Thumb-friendly Navigation for Smartphones) */}
+      <MobileBottomNav
+        config={config}
+        inventoryCount={vehicles.length}
+        activeTab={activeTab}
+        onSelectTab={scrollToSection}
       />
 
       {/* Vehicle Detail & Peritaje Modal (Fallback / Direct Quick View) */}

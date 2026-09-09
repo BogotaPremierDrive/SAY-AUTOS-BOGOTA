@@ -14,7 +14,8 @@ import {
   Sparkles,
   CheckCircle2,
   ZoomIn,
-  ArrowUpRight
+  ArrowUpRight,
+  Activity
 } from 'lucide-react';
 
 interface VehicleCardProps {
@@ -31,6 +32,13 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
   onOpenFinance
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTapped, setIsTapped] = useState(false);
+
+  const handleTouchCard = () => {
+    setIsTapped(true);
+    setTimeout(() => setIsTapped(false), 2500);
+  };
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -52,16 +60,38 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
   const isHybrid = vehicle.fuelType === 'Híbrido' || vehicle.fuelType === 'Eléctrico';
   const isPlateEven = vehicle.plateLastDigit % 2 === 0;
 
+  // Telemetry score
+  const peritajeScore = vehicle.peritaje?.score || 98;
+  const isTelemetryActive = isHovered || isTapped;
+
   return (
     <div 
       id={`vehicle-card-${vehicle.id}`}
-      className="group relative bg-gradient-to-b from-[#0a192f] via-[#071322] to-[#050d18] border border-[#dfb692]/25 hover:border-[#dfb692]/60 rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-xl hover:shadow-[0_0_25px_rgba(223,182,146,0.15)]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchCard}
+      className="group relative bg-gradient-to-b from-[#0a192f] via-[#071322] to-[#050d18] border border-[#dfb692]/25 hover:border-[#dfb692]/60 rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between shadow-xl hover:shadow-[0_0_25px_rgba(223,182,146,0.2)]"
     >
       {/* Media Gallery / Image Carousel */}
       <div 
         className="relative aspect-16/10 overflow-hidden bg-[#040810] cursor-pointer" 
         onClick={() => onSelectVehicle(vehicle)}
       >
+        {/* Floating VIP Telemetry Popup on Hover/Tap */}
+        <div 
+          className={`absolute top-11 left-1/2 -translate-x-1/2 z-20 pointer-events-none transition-all duration-300 ${
+            isTelemetryActive 
+              ? 'opacity-100 scale-100 translate-y-0' 
+              : 'opacity-0 scale-90 -translate-y-2'
+          }`}
+        >
+          <div className="px-3 py-1 rounded-full bg-[#071220]/95 border border-[#dfb692] shadow-[0_0_22px_rgba(223,182,146,0.4)] flex items-center gap-1.5 text-[9.5px] uppercase font-semibold tracking-[0.16em] text-[#dfb692] whitespace-nowrap backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Colserautos 100% Aprobado</span>
+          </div>
+        </div>
+
         <img
           src={vehicle.images[currentImageIndex]}
           alt={`${vehicle.brand} ${vehicle.model} ${vehicle.year}`}
@@ -170,7 +200,7 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
           )}
 
           {/* Quick Specifications Grid */}
-          <div className="grid grid-cols-2 gap-2.5 py-3 border-y border-[#dfb692]/15 text-xs text-white/70 font-light mb-4">
+          <div className="grid grid-cols-2 gap-2.5 py-3 border-y border-[#dfb692]/15 text-xs text-white/70 font-light mb-3.5">
             <div className="flex items-center gap-1.5">
               <Gauge className="w-3.5 h-3.5 text-[#dfb692]" />
               <span className="font-mono">{formatKm(vehicle.mileageKm)}</span>
@@ -186,6 +216,54 @@ export const VehicleCard: React.FC<VehicleCardProps> = ({
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               <span className="truncate">{vehicle.traction} • {vehicle.ownersCount} {vehicle.ownersCount === 1 ? 'Dueño' : 'Dueños'}</span>
+            </div>
+          </div>
+
+          {/* Telemetría de Peritaje Dinámica (Interactive Tacómetro / RPM Score Bar) */}
+          <div className="mb-4 p-2.5 rounded-2xl bg-[#050e1a]/80 border border-[#dfb692]/20 group-hover:border-[#dfb692]/40 transition-colors">
+            <div className="flex items-center justify-between text-[9px] uppercase tracking-wider mb-1.5 font-mono">
+              <div className="flex items-center gap-1.5 text-white/60">
+                <Activity className={`w-3 h-3 ${isTelemetryActive ? 'text-emerald-400 animate-pulse' : 'text-[#dfb692]'}`} />
+                <span>Telemetría Peritaje</span>
+              </div>
+              <span className={`font-semibold transition-colors ${isTelemetryActive ? 'text-emerald-400' : 'text-[#dfb692]'}`}>
+                {peritajeScore}/100 • {vehicle.peritaje?.company || 'COLSERAUTOS'}
+              </span>
+            </div>
+
+            {/* Graduated Telemetry Bar */}
+            <div className="h-1.5 w-full bg-[#071322] rounded-full overflow-hidden relative shadow-inner">
+              <div 
+                className="h-full bg-gradient-to-r from-[#dfb692] via-[#faece0] to-[#c5926b] rounded-full transition-all duration-700 ease-out shadow-[0_0_12px_rgba(223,182,146,0.6)]"
+                style={{ width: isTelemetryActive ? `${peritajeScore}%` : '55%' }}
+              />
+            </div>
+
+            {/* Calibrated Notches (Gran Turismo Style) */}
+            <div className="flex justify-between items-center mt-1 px-0.5">
+              {[...Array(10)].map((_, idx) => (
+                <div 
+                  key={idx} 
+                  className={`w-0.5 h-1 rounded-full transition-colors duration-300 ${
+                    isTelemetryActive && idx < Math.floor(peritajeScore / 10)
+                      ? 'bg-[#dfb692] shadow-[0_0_4px_#dfb692]' 
+                      : 'bg-white/10'
+                  }`} 
+                />
+              ))}
+            </div>
+
+            {/* Telemetric Certification Tags */}
+            <div className="flex items-center gap-1.5 mt-2 flex-wrap text-[8.5px] uppercase font-mono tracking-wider">
+              <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">
+                ✓ 100% Chasis
+              </span>
+              <span className="px-2 py-0.5 rounded bg-[#dfb692]/10 text-[#dfb692] border border-[#dfb692]/25">
+                Sin Siniestro
+              </span>
+              <span className="px-2 py-0.5 rounded bg-white/5 text-white/70 border border-white/10">
+                RUNT Limpio
+              </span>
             </div>
           </div>
 
