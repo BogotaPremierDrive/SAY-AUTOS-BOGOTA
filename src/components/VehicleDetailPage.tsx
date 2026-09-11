@@ -27,7 +27,8 @@ import {
   Check, 
   Calculator,
   ChevronRight,
-  Clock
+  Clock,
+  ExternalLink
 } from 'lucide-react';
 
 interface VehicleDetailPageProps {
@@ -314,6 +315,19 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                 <span>Consultar por Instagram @{config.instagramHandle}</span>
               </a>
 
+              {vehicle.publicationUrl && (
+                <a
+                  id="btn-inquire-now-mercadolibre"
+                  href={vehicle.publicationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-6 rounded-2xl border border-yellow-500/30 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-300 font-medium text-xs uppercase tracking-[0.14em] flex items-center justify-center gap-2 transition-all cursor-pointer"
+                >
+                  <ExternalLink className="w-3.5 h-3.5 text-yellow-400" />
+                  <span>Ver Publicación en Mercado Libre</span>
+                </a>
+              )}
+
               <div className="border-t border-[#dfb692]/15 pt-4 space-y-2.5">
                 {/* Book VIP Test Drive / Appointment */}
                 <button
@@ -552,6 +566,68 @@ export const VehicleDetailPage: React.FC<VehicleDetailPageProps> = ({
                 <span>{feat}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Document Equipment & Veracity Seal */}
+        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#09182b] to-[#06111f] border border-emerald-500/30">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-emerald-500/20 pb-4 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-400 shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-lg font-light font-serif text-white">
+                  Verificación de Datos y Equipamiento de Documento
+                </h3>
+                <p className="text-xs text-emerald-400/90 font-mono">
+                  SAY Autos Suba Bogotá • Datos cotejados con inventario oficial
+                </p>
+              </div>
+            </div>
+
+            {vehicle.publicationUrl && (
+              <a
+                href={vehicle.publicationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-500/40 text-yellow-300 text-xs font-semibold uppercase tracking-wider flex items-center gap-2 transition-all shrink-0"
+              >
+                <ExternalLink className="w-4 h-4 text-yellow-400" />
+                <span>Ver Publicación en Mercado Libre</span>
+              </a>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-white/80">
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2">
+              <div className="text-[11px] uppercase tracking-widest text-[#dfb692] font-semibold">
+                Equipamiento Reportado en Ficha Oficial:
+              </div>
+              <p className="text-white/90 leading-relaxed font-light">
+                {vehicle.documentEquipment || vehicle.features.join(' • ')}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-2.5">
+              <div className="text-[11px] uppercase tracking-widest text-emerald-400 font-semibold">
+                Garantías de Transparencia SAY Autos:
+              </div>
+              <ul className="space-y-1.5 text-white/70">
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong>Kilometraje Real:</strong> {formatKm(vehicle.mileageKm)} certificados sin manipulación.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong>Ubicación Vitrina:</strong> {vehicle.location || 'Suba - Bogotá D.C.'}, disponible para prueba física inmediata.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong>Historial RUNT y Traspaso:</strong> Sin embargos, sin reservas de dominio y listo para radicación inmediata en Tránsito.</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

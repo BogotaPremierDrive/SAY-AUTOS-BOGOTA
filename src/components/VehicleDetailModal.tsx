@@ -17,7 +17,8 @@ import {
   ChevronRight,
   Phone,
   Calculator,
-  CarFront
+  CarFront,
+  ExternalLink
 } from 'lucide-react';
 
 interface VehicleDetailModalProps {
@@ -342,35 +343,68 @@ export const VehicleDetailModal: React.FC<VehicleDetailModalProps> = ({
 
           {/* Tab 3: Equipamiento */}
           {activeTab === 'equipamiento' && (
-            <div className="p-6 rounded-xl bg-white/[0.02] border border-white/10">
-              <h4 className="text-[10px] uppercase tracking-widest text-white/60 mb-4">
-                Equipamiento de Serie & Accesorios
-              </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {vehicle.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs text-white/70 font-light">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-white/50 shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="space-y-4">
+              <div className="p-6 rounded-xl bg-white/[0.02] border border-white/10">
+                <h4 className="text-[10px] uppercase tracking-widest text-white/60 mb-4">
+                  Equipamiento de Serie & Accesorios
+                </h4>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {vehicle.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5 text-xs text-white/70 font-light">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {vehicle.documentEquipment && (
+                <div className="p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+                  <h4 className="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold mb-2 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Equipamiento Registrado en Documento Oficial</span>
+                  </h4>
+                  <p className="text-xs text-white/80 leading-relaxed font-light">
+                    {vehicle.documentEquipment}
+                  </p>
+                  <p className="text-[10px] text-white/40 mt-2 font-mono">
+                    Ubicación para verificación física: {vehicle.location || 'Suba - Bogotá D.C.'}
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
 
         {/* Modal Footer Actions */}
         <div className="p-4 sm:p-6 border-t border-white/10 bg-black flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button
-            id="modal-open-finance-calc-btn"
-            onClick={() => {
-              onClose();
-              onOpenFinance(vehicle);
-            }}
-            className="w-full sm:w-auto px-5 py-3 rounded-full border border-white/15 bg-white/[0.02] hover:border-white/30 text-white/70 hover:text-white text-[10px] uppercase tracking-wider font-light flex items-center justify-center gap-2 cursor-pointer transition-colors"
-          >
-            <Calculator className="w-3.5 h-3.5 text-white/60" />
-            <span>Simulador de Crédito</span>
-          </button>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              id="modal-open-finance-calc-btn"
+              onClick={() => {
+                onClose();
+                onOpenFinance(vehicle);
+              }}
+              className="w-full sm:w-auto px-5 py-3 rounded-full border border-white/15 bg-white/[0.02] hover:border-white/30 text-white/70 hover:text-white text-[10px] uppercase tracking-wider font-light flex items-center justify-center gap-2 cursor-pointer transition-colors"
+            >
+              <Calculator className="w-3.5 h-3.5 text-white/60" />
+              <span>Simulador de Crédito</span>
+            </button>
+
+            {vehicle.publicationUrl && (
+              <a
+                id="modal-mercadolibre-btn"
+                href={vehicle.publicationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-4 py-3 rounded-full border border-yellow-500/30 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-300 text-[10px] uppercase tracking-wider font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                title="Ver publicación oficial en Mercado Libre"
+              >
+                <ExternalLink className="w-3.5 h-3.5 text-yellow-400" />
+                <span>Mercado Libre</span>
+              </a>
+            )}
+          </div>
 
           <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
             <a

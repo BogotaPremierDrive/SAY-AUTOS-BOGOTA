@@ -10,7 +10,7 @@ interface InventoryFilterBarProps {
   totalVehicles: number;
 }
 
-const BODY_TYPES = ['Todos', 'SUV', 'Sedán', 'Hatchback', 'Pickup'];
+const BODY_TYPES = ['Todos', 'SUV', 'Sedán', 'Hatchback', 'Coupe', 'Van'];
 const FUEL_TYPES = ['Todos', 'Gasolina', 'Híbrido', 'Diésel'];
 
 export const InventoryFilterBar: React.FC<InventoryFilterBarProps> = ({

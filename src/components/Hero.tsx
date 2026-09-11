@@ -130,7 +130,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <p className="text-[10px] uppercase tracking-widest text-[#dfb692]">
                       Entrega Inmediata
                     </p>
-                    <p className="text-xl font-light font-serif text-white">BMW Serie 3 330i M Sport</p>
+                    <p className="text-xl font-light font-serif text-white">BMW Serie 2 Gran Coupé 218i</p>
                   </div>
                   <p className="text-lg font-light text-white/80 font-mono">2023</p>
                 </div>
@@ -138,19 +138,19 @@ export const Hero: React.FC<HeroProps> = ({
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-[#050c18] p-2.5 rounded-xl border border-white/10">
                     <p className="text-[9px] uppercase tracking-widest text-white/40 mb-0.5">Kilometraje</p>
-                    <p className="text-xs font-mono text-white">12.400 KM</p>
+                    <p className="text-xs font-mono text-white">10.130 KM</p>
                   </div>
                   <div className="bg-[#050c18] p-2.5 rounded-xl border border-white/10">
                     <p className="text-[9px] uppercase tracking-widest text-white/40 mb-0.5">Peritaje</p>
                     <p className="text-xs text-emerald-400 font-medium flex items-center gap-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>99 / 100 Colserautos</span>
+                      <span>100 / 100 Colserautos</span>
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-white/60 pt-1">
-                  <span>Placa Bogotá (Par)</span>
+                  <span>Placa Bogotá (Par - 6)</span>
                   <button 
                     onClick={onExploreClick}
                     className="text-[#dfb692] hover:underline text-[11px] uppercase tracking-wider font-medium cursor-pointer"

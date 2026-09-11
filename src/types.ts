@@ -1,10 +1,10 @@
 export type VehicleStatus = 'Disponible' | 'Apartado' | 'Vendido';
 
-export type BodyType = 'SUV' | 'Sedán' | 'Hatchback' | 'Pickup' | 'Coupe';
+export type BodyType = string;
 
-export type FuelType = 'Gasolina' | 'Híbrido' | 'Diésel' | 'Eléctrico';
+export type FuelType = string;
 
-export type TransmissionType = 'Automática' | 'Mecánica' | 'Secuencial';
+export type TransmissionType = string;
 
 export interface PeritajeDetails {
   score: number; // 0-100
@@ -36,7 +36,7 @@ export interface Vehicle {
   fuelType: FuelType;
   engineDisplacement: string;
   bodyType: BodyType;
-  traction: '4x4' | 'AWD' | 'FWD' | 'RWD';
+  traction: string;
   color: string;
   plateCity: string;
   plateLastDigit: number;
@@ -44,11 +44,15 @@ export interface Vehicle {
   soatValidUntil: string;
   rtmValidUntil: string;
   features: string[];
+  documentEquipment?: string;
   peritaje: PeritajeDetails;
   images: string[];
   status: VehicleStatus;
   isFeatured?: boolean;
   description?: string;
+  publicationUrl?: string;
+  location: string;
+  verifiedBadge?: boolean;
 }
 
 export interface AppointmentRequest {

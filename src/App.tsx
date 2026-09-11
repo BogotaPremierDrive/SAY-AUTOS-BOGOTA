@@ -14,7 +14,6 @@ import { FinanceCalculator } from './components/FinanceCalculator';
 import { SellCarSection } from './components/SellCarSection';
 import { LocationAndContact } from './components/LocationAndContact';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
-import { MobileBottomNav } from './components/MobileBottomNav';
 import { WhatsAppConfigModal } from './components/WhatsAppConfigModal';
 import { Footer } from './components/Footer';
 import { generateWhatsAppLink, formatCOP } from './utils/formatters';
@@ -39,7 +38,7 @@ const INITIAL_FILTER: VehicleFilter = {
   plateEvenOdd: 'all',
   minPrice: 0,
   maxPrice: 500000000,
-  minYear: 2015,
+  minYear: 2005,
   maxYear: 2026,
   sortBy: 'price-asc'
 };
@@ -159,13 +158,27 @@ export default function App() {
         }
 
         // Body type
-        if (filter.bodyType !== 'Todos' && v.bodyType !== filter.bodyType) {
-          return false;
+        if (filter.bodyType !== 'Todos') {
+          const bt = v.bodyType.toLowerCase();
+          const target = filter.bodyType.toLowerCase();
+          if (target === 'coupe' && (bt.includes('coupé') || bt.includes('coupe'))) {
+            // matches Gran Coupé
+          } else if (!bt.includes(target)) {
+            return false;
+          }
         }
 
         // Fuel type
-        if (filter.fuelType !== 'Todos' && v.fuelType !== filter.fuelType) {
-          return false;
+        if (filter.fuelType !== 'Todos') {
+          const ft = v.fuelType.toLowerCase();
+          const target = filter.fuelType.toLowerCase();
+          if (target === 'híbrido' && !ft.includes('híbrido') && !ft.includes('hibrido')) {
+            return false;
+          } else if (target === 'diésel' && !ft.includes('diésel') && !ft.includes('diesel')) {
+            return false;
+          } else if (target === 'gasolina' && !ft.includes('gasolina')) {
+            return false;
+          }
         }
 
         // Plate Even/Odd (Pico y Placa Bogotá)
@@ -415,14 +428,6 @@ export default function App() {
         config={config}
         onOpenConfig={() => setIsConfigModalOpen(true)}
         onOpenCard={() => scrollToSection('tarjeta')}
-      />
-
-      {/* Mobile Bottom Navigation Bar (Thumb-friendly Navigation for Smartphones) */}
-      <MobileBottomNav
-        config={config}
-        inventoryCount={vehicles.length}
-        activeTab={activeTab}
-        onSelectTab={scrollToSection}
       />
 
       {/* Vehicle Detail & Peritaje Modal (Fallback / Direct Quick View) */}
